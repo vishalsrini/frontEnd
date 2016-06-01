@@ -9,9 +9,29 @@
 	<title>Apaarr International Resources - Scheduler for seller</title>
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ng-cordova/0.1.26-alpha/ng-cordova.min.js"></script>
+	 <script type="text/javascript" charset="utf-8">
+
+             function onLoad()
+             {
+                  document.addEventListener("deviceready", onDeviceReady, true);
+             }
+
+             function onDeviceReady()
+             {
+                  // navigator.notification.alert("PhoneGap is working");
+             }
+
+             function callAnothePage()
+             {
+                window.location = "processed_seller.php";
+             }
+
+          </script>
 </head>
 <body>
-<a href="http://www.apaarr.com/processed_buyer.php"> Processed cashew Buyer</a>
-  <a href="http://www.apaarr.com/processed_seller.php"> Processed cashew Seller</a>
+ <h1>Welcome to Apaarr International Resources</h1>
+        <h2>Alpha application</h2>
+        <button name="buttonClick" onclick="callAnothePage()">Processed Seller!</button>
 </body>
 </html
