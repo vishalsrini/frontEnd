@@ -9,9 +9,7 @@
 	<title>Apaarr International Resources - Scheduler for seller</title>
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-	
-	
-	
+
 	<script>
 		function ajaxObj( meth, url ) {
 			var x = new XMLHttpRequest();
@@ -76,22 +74,26 @@ function ajaxReturn(x){
 				status.innerHTML="Fill out all the form data";
 			} else {
 				_("submit").style.display="none";
-				var ajax = ajaxObj("POST", "http://www.apaarr.com/fileProcSeller.php");
-				ajax.onreadystatechange = function() {
-					if(ajaxReturn(ajax) == true) {
-						if(ajax.responseText != "add_success"){
-						_("submit").style.display="block";
-							status.innerHTML = ajax.responseText;
-							
-						} else {
-							_("submit").style.display="none";
-							status.innerHTML = "OK "+n+", check your email inbox and junk mail box at <u>"+m+"</u> for a moment to see the details you given. Our team will come and speak with you soon.(mail may take till 15 mins to reach so be cool)";
-						}
-					}
+				var dataString="n="+n+"&m="+m+"&ph="+ph+"&co="+co+"&md="+md+"&mm="+mm+"&qr="+qr+"&p="+p+"&packing="+packing+"&loading="+loading+"&inspection="+inspection+"&pol="+pol+"&sm="+sm+"&pt="+pt+"&fob="+fob+"&cif="+cif+"&ty="+ty+"&si="+si+"&qandg="+qandg+"&nslg="+nslg;
+				$.ajax({
+ 				type: "POST",
+				 url:"http://www.apaarr.com/fileProcSeller.php",
+				 data: dataString,
+ 				crossDomain: true,
+ 				cache: false,
+ 				success: function(data){
+ 					if(data=="add_success")
+ 					{
+						 _("submit").style.display="none";
+ 						status.innerHTML = "OK "+n+", check your email inbox and junk mail box at <u>"+m+"</u> for a moment to see the details you given. Our team will come and speak with you soon.(mail may take till 15 mins to reach so be cool)";
+ 					}
+ 					else 
+ 					{
+ 						alert("error");
+ 					}
+					 }
+					 });
 				}
-				
-				ajax.send("n="+n+"&m="+m+"&ph="+ph+"&co="+co+"&md="+md+"&mm="+mm+"&qr="+qr+"&p="+p+"&packing="+packing+"&loading="+loading+"&inspection="+inspection+"&pol="+pol+"&sm="+sm+"&pt="+pt+"&fob="+fob+"&cif="+cif+"&ty="+ty+"&si="+si+"&qandg="+qandg+"&nslg="+nslg);
-			}
 		}
 	
 	</script>
