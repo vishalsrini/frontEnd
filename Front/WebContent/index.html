@@ -12,6 +12,29 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ionic-framework/2.0.0-beta.2/ionic.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ng-cordova/0.1.26-alpha/ng-cordova.min.js"></script>
 	 <script type="text/javascript" charset="utf-8">
+	 	function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+
+    // Check if the XMLHttpRequest object has a "withCredentials" property.
+    // "withCredentials" only exists on XMLHTTPRequest2 objects.
+    xhr.open(method, url, true);
+
+  } else if (typeof XDomainRequest != "undefined") {
+
+    // Otherwise, check if XDomainRequest.
+    // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+
+  } else {
+
+    // Otherwise, CORS is not supported by the browser.
+    xhr = null;
+
+  }
+  return xhr;
+}
 
              function onLoad()
              {
@@ -30,6 +53,7 @@
              
              function callBuyer()
              {
+             	
                 window.location.replace = "http://www.apaarr.com/raw_buyer.php";
              }
              
@@ -40,6 +64,7 @@
              
              function callBuyerP()
              {
+             	createCORSRequest("GET","http://www.apaarr.com/processed_buyer.php");
                 window.location.replace = "http://www.apaarr.com/processed_buyer.php";
              }
              
