@@ -11,8 +11,24 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	
 	
-	<script src="http://www.apaarr.com/ajax.js"></script>
+	
 	<script>
+		function ajaxObj( meth, url ) {
+			var x = new XMLHttpRequest();
+			x.open( meth, url, true );
+			x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			x.setRequestHeader("Access-Control-Allow-Origin","*");
+   			x.setRequestHeader("Access-Control-Allow-Credentials", "true");
+   			x.setRequestHeader("Access-Control-Allow-Methods", "POST");
+   			x.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
+			return x;
+		}
+function ajaxReturn(x){
+	if(x.readyState == 4 && x.status == 200){
+	    return true;	
+	}
+}
+		
 		function _(elem) {
 			return document.getElementById(elem);
 		}
@@ -73,6 +89,7 @@
 						}
 					}
 				}
+				
 				ajax.send("n="+n+"&m="+m+"&ph="+ph+"&co="+co+"&md="+md+"&mm="+mm+"&qr="+qr+"&p="+p+"&packing="+packing+"&loading="+loading+"&inspection="+inspection+"&pol="+pol+"&sm="+sm+"&pt="+pt+"&fob="+fob+"&cif="+cif+"&ty="+ty+"&si="+si+"&qandg="+qandg+"&nslg="+nslg);
 			}
 		}
