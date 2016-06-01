@@ -8,7 +8,7 @@
 	<meta name="Description" content="">
 	<title>Apaarr International Resources - Scheduler for seller</title>
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionic/1.3.1/css/ionic.min.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ng-cordova/0.1.26-alpha/ng-cordova.min.js"></script>
 	 <script type="text/javascript" charset="utf-8">
 
@@ -27,16 +27,25 @@
                 window.location = "processed_seller.php";
              }
              
-             function callAnothePage()
+             function callBuyer()
+             {
+                window.location = "http://www.apaarr.com/raw_buyer.php";
+             }
+             
+             function callSeller()
+             {
+                window.location = "http://www.apaarr.com/raw_seller.php";
+             }
+             
+             function callBuyerP()
+             {
+                window.location = "http://www.apaarr.com/processed_buyer.php";
+             }
+             
+             function callSellerP()
              {
                 window.location = "processed_seller.php";
              }
-             
-             function callAnothePage()
-             {
-                window.location = "processed_seller.php";
-             }
-             
 
           </script>
 </head>
@@ -69,8 +78,9 @@
    	Seller
 	</button>
 	</div>
- <h1>Welcome to Apaarr International Resources</h1>
-        <h2>Alpha application</h2>
-        <button name="buttonClick" onclick="callAnothePage()">Processed Seller!</button>
+	<div class="bar bar-footer bar-positive">
+   <h1 class="title">By Vishal Srinivasan</h1>
+</div>
+
 </body>
 </html
