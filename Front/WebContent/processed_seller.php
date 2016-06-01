@@ -9,6 +9,7 @@
 	<title>Apaarr International Resources - Scheduler for seller</title>
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script type="text/javascript" src="jquerry.js"></script>
 
 	<script>
 		function ajaxObj( meth, url ) {
