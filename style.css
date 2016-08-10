@@ -148,7 +148,7 @@ a:hover {
     margin-bottom: 5px;
     display: block;
     text-indent: -9999px;
-    background-image: url('../appstore-button.png');
+    background-image: url('/appstore-button.png');
 }
 
 .appstore-buttons .btn-store.btn-appstore {
