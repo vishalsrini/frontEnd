@@ -1,0 +1,673 @@
+Registration:
+
+Name
+eMail
+password
+phone
+companyName
+companyType ( public, private, partnership )
+registrationNumber
+addressLine1
+addressLine2
+city
+region ( state/ province/ region )
+postalCode ( postal/ zip )
+country
+
+Requirements:
+
+1. Raw Cashew:
+
+year: Number
+origin: String
+quantity: Number
+price: Number
+outTurn: Percentage
+nutCount: Percentage
+defective: Percentage
+moisture: Percentage
+others: percentage
+packing: ( Sea worthy jute bag / sisal bags of 80kgs )
+loading: ( 20ft Container / 40ft Container / Break Bulk )
+inspection: ( SGS )
+landingPort: String
+shipment: String ( Month )
+fob: Boolean,
+cif: Boolean
+paymentTerms: String
+postedBy: ObjectId
+
+
+2. Processed Cashew:
+
+origin: String
+processedAt: String
+quantity: Number
+price: Number
+type: String ( Whole / Pieces )
+grade: String ( WW180 / WW210 .. )
+defective: Percentage
+moisture: Percentage
+quality: String ( first quality fancy / second / ... )
+nslg: Percentage
+packing: ( 2 Tins of 10kg each in carton / 2 tins of 25LBS each in carton )
+inspection: Boolean ( true / false )
+location: String
+shipment: String ( Month )
+incoTerms: String ( FOB / CIF )
+paymentTerms: String
+postedBy: ObjectId
+
+
+Offers:
+
+1. Raw Cashew
+
+<<< Same model as requirements >>>
+
+
+2. Processed Cashew
+
+origin: String
+processedAt: String
+quantity: Number
+price: Number
+type: String ( Whole / Pieces )
+grade: String ( WW180 / WW210 .. )
+defective: Percentage
+moisture: Percentage
+quality: String ( first quality fancy / second / ... )
+nslg: Percentage
+packing: ( 2 Tins of 10kg each in carton / 2 tins of 25LBS each in carton )
+inspection: Boolean ( true / false )
+location: String
+shipment: String ( Month )
+imageUrl: String ( Url in hosting )
+paymentTerms: String
+postedBy: ObjectId
+
+------------------------------------------------------------------------------------------------------------------------
+Sample Data:
+------------------------------------------------------------------------------------------------------------------------
+
+1. Registration:
+
+post /users/register
+
+{
+	"username": "vishalvishal619@gmail.com",
+	"password": "qwerty",
+	"name": "Vishal Srinivasan",
+	"phone": "8056146795",
+	"companyName": "APAARR",
+	"companyType": "Private",
+	"registrationNumber": "r18yn00",
+	"addressLine1": "Metha Nagar",
+	"addressLine2": "Aaandan kuppam",
+	"city": "Chennai",
+	"region": "Tamil Nadu",
+	"postalCode": "600069",
+	"country": "India"
+}
+------------------------------------------------------------------------------------------------------------------------
+2. Changing access ( Admin and User )
+------------------------------------------------------------------------------------------------------------------------
+post /users/addAdmin
+
+Request:
+
+{
+	"username": "vishal@apaarr.com",
+	"password": "Ramamani123$",
+	"admin": {
+	"username": "vishalvishal619@gmail.com",
+	"status": true
+	}
+}
+
+Response:
+
+{
+    "status": "success",
+    "message": "Changed access to admin"
+}
+
+Changing status to false - revoke admin access
+------------------------------------------------------------------------------------------------------------------------
+3. Login
+------------------------------------------------------------------------------------------------------------------------
+post /users/login
+
+Request:
+
+{
+	"username": "vishalvishal619@gmail.com",
+	"password": "qwerty"
+}
+
+Response:
+
+{
+    "status": "Login Successful",
+    "success": true,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6dHJ1ZSwic2VsZWN0ZWQiOnt9LCJnZXR0ZXJzIjp7fSwiX2lkIjoiNTk3NzViZTAwYTNhMzkyZDA4YmUxMzBhIiwid2FzUG9wdWxhdGVkIjpmYWxzZSwiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsidXNlcm5hbWUiOiJpbml0IiwiYWRtaW4iOiJpbml0IiwicmVnaXN0cmF0aW9uTnVtYmVyIjoiaW5pdCIsInJlZ2lvbiI6ImluaXQiLCJwb3N0YWxDb2RlIjoiaW5pdCIsInBob25lIjoiaW5pdCIsIm5hbWUiOiJpbml0IiwiY291bnRyeSI6ImluaXQiLCJjb21wYW55VHlwZSI6ImluaXQiLCJjb21wYW55TmFtZSI6ImluaXQiLCJjaXR5IjoiaW5pdCIsImFkZHJlc3NMaW5lMiI6ImluaXQiLCJhZGRyZXNzTGluZTEiOiJpbml0IiwiX192IjoiaW5pdCIsImhhc2giOiJpbml0Iiwic2FsdCI6ImluaXQiLCJjcmVhdGVkQXQiOiJpbml0IiwidXBkYXRlZEF0IjoiaW5pdCIsIl9pZCI6ImluaXQifSwic3RhdGVzIjp7Imlnbm9yZSI6e30sImRlZmF1bHQiOnt9LCJpbml0Ijp7ImFkbWluIjp0cnVlLCJyZWdpc3RyYXRpb25OdW1iZXIiOnRydWUsInJlZ2lvbiI6dHJ1ZSwicG9zdGFsQ29kZSI6dHJ1ZSwicGhvbmUiOnRydWUsIm5hbWUiOnRydWUsImNvdW50cnkiOnRydWUsImNvbXBhbnlUeXBlIjp0cnVlLCJjb21wYW55TmFtZSI6dHJ1ZSwiY2l0eSI6dHJ1ZSwiYWRkcmVzc0xpbmUyIjp0cnVlLCJhZGRyZXNzTGluZTEiOnRydWUsIl9fdiI6dHJ1ZSwidXNlcm5hbWUiOnRydWUsImhhc2giOnRydWUsInNhbHQiOnRydWUsImNyZWF0ZWRBdCI6dHJ1ZSwidXBkYXRlZEF0Ijp0cnVlLCJfaWQiOnRydWV9LCJtb2RpZnkiOnt9LCJyZXF1aXJlIjp7fX0sInN0YXRlTmFtZXMiOlsicmVxdWlyZSIsIm1vZGlmeSIsImluaXQiLCJkZWZhdWx0IiwiaWdub3JlIl19LCJwYXRoc1RvU2NvcGVzIjp7fSwiZW1pdHRlciI6eyJkb21haW4iOm51bGwsIl9ldmVudHMiOnt9LCJfZXZlbnRzQ291bnQiOjAsIl9tYXhMaXN0ZW5lcnMiOjB9fSwiaXNOZXciOmZhbHNlLCJfZG9jIjp7ImFkbWluIjp0cnVlLCJyZWdpc3RyYXRpb25OdW1iZXIiOiJyMTh5bjAwIiwicmVnaW9uIjoiVGFtaWwgTmFkdSIsInBvc3RhbENvZGUiOiI2MDAwNjkiLCJwaG9uZSI6IjgwNTYxNDY3OTUiLCJuYW1lIjoiVmlzaGFsIFNyaW5pdmFzYW4iLCJjb3VudHJ5IjoiSW5kaWEiLCJjb21wYW55VHlwZSI6IlByaXZhdGUiLCJjb21wYW55TmFtZSI6IkFQQUFSUiIsImNpdHkiOiJDaGVubmFpIiwiYWRkcmVzc0xpbmUyIjoiQWFhbmRhbiBrdXBwYW0iLCJhZGRyZXNzTGluZTEiOiJNZXRoYSBOYWdhciIsIl9fdiI6MCwidXNlcm5hbWUiOiJ2aXNoYWx2aXNoYWw2MTlAZ21haWwuY29tIiwiaGFzaCI6IjJhZjk2OGM0OTcwYjZhYzUzYWY2ZGRlMTZiZjQwOTkxNTc4NmQ1ZmUxNjFlOTk0NGQwOWMzMjRjNTcwZTZlYzkyMDE2MTRhMzE1NmE2ZjBiZjY5ZDBkZWQ5YWZmYmEwYWZjMDZjYWZhNmY4YzRlMzMzMTM4MTM3OGVmMTFjMDRlMTAyYmFhOTg0ZWI0ZGFmNzM1YjE2ODc1YmEwOWVlMWZjZjg5NTM2MmFhNzRiMjNiZjk3Yjc3OGZmZWI5Y2E0ZGZlN2IxMjM0YzUwNmMxYWE4NDQ5NmViZmU0MDAzOWYzMDhlY2JkMTU3MTRjNDkwYzllYWM3MzhlYjNjZmQzZTkxMzhlYjUyMzgyMWU2NGI0MWNlZmU3ZDM4MmJmNGU0N2IxZjk5MWVlMjZkNjViMjU3ZDIxMzQ1NDYxOTIxNmVlYWViYWJlYzhlNmI3NWFjODA5YTM2ZDExMWZkNDkzYmYwNjg3ODRlZDJjMDMwYzdjMDIwZDdmYjliYmU1MmUwYWIxNTAyYWY0M2VlYjZhOWU3MmUxOWQzMTdlYTcwZGU0MTFjYWQzNmZmOGJkMjJkMDQxZDE0NjcwMWZkNmZhMjYwNzkxNjA4Y2JlZjdhMjc1YjExMTQwNGMxNzE3ZDNmZjk4ODM0MzYwNjcwNmU4NjAwZjYxZDQ3ZDljODA2YWJiZmZkOTY3ODgyNWViMjk4ZjIwNDk3NjgwMzk3ZmI1NjQ2MzFkMzRhOWQ5M2U0N2EzYWE3OTFmNjdhZTgzNjA3ZTNiZmUxMWIwYzdhMDNlOThiZTVmYjI5ZGE2MmI5M2JlNDViNmEzNWFkYjVhNzFkNzEwNTk2OTRmODFhYjg1YTZiZWRiZTE4NzU0ZTg2ZWZmZGY1MDMyYmQzNGZlMGU1YmJhY2ZkYjdjM2U2M2JiZGM5ZjIxYWE5NDE4MDJmMzVhY2I5NmFlOTQ3MjY3YTViYjEzYzMwZjBlMGJmNjE3Y2NhYWQ3MzFmMDZhMTIzMjI2NGMyYmZiMWJkNjc1MWQ4NThmMDUyMTMyZTdiZDhlOGI0ZjVhMTk3YmNmMzUyMzU3ZDg1NTAxZjAwMDExODc4ZGYyYmFmMDY0MTMzNTE5NzBhNDU2NjQzOTg1NzE4N2E2OTViMWEzMDMwOGQyYzU2YzlkM2Q2NTJkMDk3YzljYjcxOGQ1YTM0MmJhYTY2ODg1ODk5OWI4MjJhMjM0N2VkODliZjU0YzEzZWYwMGNhZDA3Zjk5ZDllNmQ4ZmIwYzI5YzExZjYxNzczNjc4Y2RkMzI0NmFmNTgwM2VjNjAzOTlkODQzMWU4NDM2YzI5YWIzYTE5MmJhMjA1YWEzZjZmNWJkMDJlODYwOWMzOTVmOWUiLCJzYWx0IjoiOWEyOGY0NjczODcwNTI2NjdjYWU3Yjk4ZDQ1OWY5NDZlYWFhODkyNzI4ZmY3YmQ5ZmEwNDVhMGFlZmEyZDJjZiIsImNyZWF0ZWRBdCI6IjIwMTctMDctMjVUMTQ6NTU6MjkuMTg3WiIsInVwZGF0ZWRBdCI6IjIwMTctMDctMjZUMDc6MDk6NDguMjgyWiIsIl9pZCI6IjU5Nzc1YmUwMGEzYTM5MmQwOGJlMTMwYSJ9LCIkaW5pdCI6dHJ1ZSwiaWF0IjoxNTAxMDUzMjc1LCJleHAiOjE1MDEwNTY4NzV9.lqlKWedhkdKYj6y0LBrJarQJ6nmExAdop72wd4i-hDk"
+}
+------------------------------------------------------------------------------------------------------------------------
+4. Raw Cashew Requirements
+------------------------------------------------------------------------------------------------------------------------
+post /req/raw
+
+Request: 
+
+{
+	"year": 2017,
+	"origin": "Benin",
+	"quantity": 2000,
+	"price": 1000,
+	"outTurn": 10,
+	"nutCount": 2,
+	"defective": 3,
+	"moisture": 4,
+	"others": 2,
+	"packing": "Sea Worthy Jute Bag",
+	"loading": "20ft Container",
+	"inspection": "SGS",
+	"landingPort": "Kerala",
+	"shipment": "August",
+	"fob": true,
+	"cif": false,
+	"paymentTerms": "20% Advance, 30% before dispatch"
+}
+
+Response:
+
+{
+    "status": "success",
+    "message": "Requirement posted successfully",
+    "id": "5978682c43dc21205c068cbe"
+}
+------------------------------------------------------------------------------------------------------------------------
+get /req/raw
+
+Request:
+
+x-access-token header
+
+Response:
+
+[
+    {
+        "_id": "597867bf43dc21205c068cbd",
+        "updatedAt": "2017-07-26T09:58:23.493Z",
+        "createdAt": "2017-07-26T09:58:23.493Z",
+        "year": 2017,
+        "origin": "Benin",
+        "quantity": 2000,
+        "price": 1000,
+        "outTurn": 10,
+        "nutCount": 2,
+        "defective": 3,
+        "moisture": 4,
+        "others": 2,
+        "packing": "Sea Worthy Jute Bag",
+        "loading": "20ft Container",
+        "inspection": "SGS",
+        "landingPort": "Kerala",
+        "shipment": "August",
+        "fob": true,
+        "cif": false,
+        "paymentTerms": "20% Advance, 30% before dispatch",
+        "postedBy": "5978469f88757e30d8508f5a",
+        "__v": 0
+    }
+]
+------------------------------------------------------------------------------------------------------------------------
+GET /users/:userId
+
+Request:
+
+x-access-token header
+
+Response:
+
+{
+    "_id": "59788eb449bfa74fc0db5160",
+    "updatedAt": "2017-07-26T12:44:36.652Z",
+    "createdAt": "2017-07-26T12:44:36.649Z",
+    "username": "vishalvishal619@gmail.com",
+    "__v": 0,
+    "addressLine1": "Metha Nagar",
+    "addressLine2": "Aaandan kuppam",
+    "city": "Chennai",
+    "companyName": "APAARR",
+    "companyType": "Private",
+    "country": "India",
+    "name": "Vishal Srinivasan",
+    "phone": "8056146678",
+    "postalCode": "600069",
+    "region": "Tamil Nadu",
+    "registrationNumber": "r18yn00",
+    "admin": false
+}
+
+------------------------------------------------------------------------------------------------------------------------
+GET /req/users
+
+Request:
+
+x-access-token header
+
+Response:
+
+All raw and processed cashew requirements of that particular user
+
+------------------------------------------------------------------------------------------------------------------------
+POST /req/processed
+
+Request:
+
+{
+	"origin": "String",
+    "processedAt": "String",
+    "quantity": 1000,
+    "price": 10000,
+    "type": "String",
+    "grade": "String", 
+    "defective": 1,
+    "moisture": 2,
+    "quality": "String",
+    "nslg": 3,
+    "packing": "String",
+    "inspection": true,
+    "location": "String",
+    "shipment": "String",
+    "fob": true,
+    "cif": false,
+    "paymentTerms": "String"
+}
+
+Response:
+
+{
+    "status": "success",
+    "message": "processed cashew added successfully",
+    "id": "5978ac3dc913454eecb6be3b"
+}
+
+------------------------------------------------------------------------------------------------------------------------
+GET /req/processed
+
+Request:
+
+x-access-token Header
+
+Response:
+
+[
+    {
+        "_id": "5978ac3dc913454eecb6be3b",
+        "updatedAt": "2017-07-26T14:50:37.358Z",
+        "createdAt": "2017-07-26T14:50:37.358Z",
+        "origin": "String",
+        "processedAt": "String",
+        "quantity": 1000,
+        "price": 10000,
+        "type": "String",
+        "grade": "String",
+        "defective": 1,
+        "moisture": 2,
+        "quality": "String",
+        "nslg": 3,
+        "packing": "String",
+        "inspection": true,
+        "location": "String",
+        "shipment": "String",
+        "fob": true,
+        "cif": false,
+        "paymentTerms": "String",
+        "__v": 0
+    }
+]
+
+------------------------------------------------------------------------------------------------------------------------
+PUT /req/processed/:processedId
+
+Request:
+
+http://localhost:3000/req/processed/5978ae2b6de48a261421829c
+
+{
+	"origin": "Chennai"
+}
+
+Response:
+
+{
+    "status": "success",
+    "message": "updated successfully",
+    "updated": {
+        "_id": "5978ae2b6de48a261421829c",
+        "updatedAt": "2017-07-26T14:59:09.817Z",
+        "createdAt": "2017-07-26T14:58:51.807Z",
+        "origin": "Chennai",
+        "processedAt": "String",
+        "quantity": 1000,
+        "price": 10000,
+        "type": "String",
+        "grade": "String",
+        "defective": 1,
+        "moisture": 2,
+        "quality": "String",
+        "nslg": 3,
+        "packing": "String",
+        "inspection": true,
+        "location": "String",
+        "shipment": "String",
+        "fob": true,
+        "cif": false,
+        "paymentTerms": "String",
+        "postedBy": "59788eb449bfa74fc0db5160",
+        "__v": 0
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------
+5. Cashew Offers
+------------------------------------------------------------------------------------------------------------------------
+POST /offers/raw
+
+Request:
+
+{
+	"year": 2017,
+	"origin": "Benin",
+	"quantity": 2000,
+	"price": 1000,
+	"outTurn": 10,
+	"nutCount": 2,
+	"defective": 3,
+	"moisture": 4,
+	"others": 2,
+	"packing": "Sea Worthy Jute Bag",
+	"loading": "20ft Container",
+	"inspection": "SGS",
+	"landingPort": "Kerala",
+	"shipment": "August",
+	"fob": true,
+	"cif": false,
+	"paymentTerms": "20% Advance, 30% before dispatch"
+}
+
+Response:
+
+{
+    "status": "success",
+    "message": "Created Successfully",
+    "id": "5979e58a2aadc42780f65e0c"
+}
+------------------------------------------------------------------------------------------------------------------------
+GET /offers/raw
+
+Request:
+
+x-access-token header
+
+Response:
+
+[
+    {
+        "_id": "5979e58a2aadc42780f65e0c",
+        "updatedAt": "2017-07-27T13:07:22.321Z",
+        "createdAt": "2017-07-27T13:07:22.321Z",
+        "year": 2017,
+        "origin": "Benin",
+        "quantity": 2000,
+        "price": 1000,
+        "outTurn": 10,
+        "nutCount": 2,
+        "defective": 3,
+        "moisture": 4,
+        "others": 2,
+        "packing": "Sea Worthy Jute Bag",
+        "loading": "20ft Container",
+        "inspection": "SGS",
+        "landingPort": "Kerala",
+        "shipment": "August",
+        "fob": true,
+        "cif": false,
+        "paymentTerms": "20% Advance, 30% before dispatch",
+        "postedBy": "59788eb449bfa74fc0db5160",
+        "__v": 0
+    }
+]
+------------------------------------------------------------------------------------------------------------------------
+PUT /offers/raw/:cashewId
+
+Request:
+
+http://localhost:3000/offers/raw/5979e58a2aadc42780f65e0c
+
+{
+	"origin": "Chennai"
+}
+
+Response:
+
+{
+    "status": "success",
+    "message": "Updated Successfully",
+    "id": "5979e58a2aadc42780f65e0c"
+}
+------------------------------------------------------------------------------------------------------------------------
+DELETE /offers/raw
+
+Deletes everything
+------------------------------------------------------------------------------------------------------------------------
+DELETE /offers/raw/:cashewId
+
+Deletes that particular cashew
+------------------------------------------------------------------------------------------------------------------------
+POST /offers/processed
+
+Request:
+
+{
+	"origin": "String",
+    "processedAt": "String",
+    "quantity": 1000,
+    "price": 10000,
+    "type": "String",
+    "grade": "String", 
+    "defective": 1,
+    "moisture": 2,
+    "quality": "String",
+    "nslg": 3,
+    "packing": "String",
+    "inspection": true,
+    "location": "String",
+    "shipment": "String",
+    "fob": true,
+    "cif": false,
+    "paymentTerms": "String",
+    "image": "/users/1/a.jpg"
+}
+
+Response:
+
+{
+    "status": "success",
+    "message": "Created Successfully",
+    "id": "5979e8664bd22717d0b3eab4"
+}
+------------------------------------------------------------------------------------------------------------------------
+GET /offers/processed
+
+Request:
+
+x-access-token Header
+
+Response:
+
+[
+    {
+        "_id": "5979e79d2aadc42780f65e0e",
+        "updatedAt": "2017-07-27T13:16:13.541Z",
+        "createdAt": "2017-07-27T13:16:13.541Z",
+        "origin": "String",
+        "processedAt": "String",
+        "quantity": 1000,
+        "price": 10000,
+        "type": "String",
+        "grade": "String",
+        "defective": 1,
+        "moisture": 2,
+        "quality": "String",
+        "nslg": 3,
+        "packing": "String",
+        "inspection": true,
+        "location": "String",
+        "shipment": "String",
+        "fob": true,
+        "cif": false,
+        "paymentTerms": "String",
+        "image": "/users/1/a.jpg",
+        "postedBy": "59788eb449bfa74fc0db5160",
+        "__v": 0
+    },
+    {
+        "_id": "5979e8664bd22717d0b3eab4",
+        "updatedAt": "2017-07-27T13:19:34.758Z",
+        "createdAt": "2017-07-27T13:19:34.758Z",
+        "origin": "String",
+        "processedAt": "String",
+        "quantity": 1000,
+        "price": 10000,
+        "type": "String",
+        "grade": "String",
+        "defective": 1,
+        "moisture": 2,
+        "quality": "String",
+        "nslg": 3,
+        "packing": "String",
+        "inspection": true,
+        "location": "String",
+        "shipment": "String",
+        "fob": true,
+        "cif": false,
+        "paymentTerms": "String",
+        "image": "/users/1/a.jpg",
+        "postedBy": "59788eb449bfa74fc0db5160",
+        "__v": 0
+    }
+]
+------------------------------------------------------------------------------------------------------------------------
+PUT /offers/processed/:cashewId
+
+Request:
+
+http://localhost:3000/offers/processed/5979e79d2aadc42780f65e0e
+
+{
+	"origin": "Chennai"
+}
+
+Response:
+
+{
+    "status": "success",
+    "message": "Updated Successfully",
+    "id": "5979e79d2aadc42780f65e0e"
+}
+------------------------------------------------------------------------------------------------------------------------
+GET /offers
+
+Request:
+
+x-access-token Header
+
+Response:
+
+{
+    "raw": [
+        {
+            "_id": "5979e76a2aadc42780f65e0d",
+            "updatedAt": "2017-07-27T13:15:22.512Z",
+            "createdAt": "2017-07-27T13:15:22.512Z",
+            "year": 2017,
+            "origin": "Benin",
+            "quantity": 2000,
+            "price": 1000,
+            "outTurn": 10,
+            "nutCount": 2,
+            "defective": 3,
+            "moisture": 4,
+            "others": 2,
+            "packing": "Sea Worthy Jute Bag",
+            "loading": "20ft Container",
+            "inspection": "SGS",
+            "landingPort": "Kerala",
+            "shipment": "August",
+            "fob": true,
+            "cif": false,
+            "paymentTerms": "20% Advance, 30% before dispatch",
+            "postedBy": "59788eb449bfa74fc0db5160",
+            "__v": 0
+        }
+    ],
+    "processed": [
+        {
+            "_id": "5979e79d2aadc42780f65e0e",
+            "updatedAt": "2017-07-27T13:24:54.470Z",
+            "createdAt": "2017-07-27T13:16:13.541Z",
+            "origin": "Chennai",
+            "processedAt": "String",
+            "quantity": 1000,
+            "price": 10000,
+            "type": "String",
+            "grade": "String",
+            "defective": 1,
+            "moisture": 2,
+            "quality": "String",
+            "nslg": 3,
+            "packing": "String",
+            "inspection": true,
+            "location": "String",
+            "shipment": "String",
+            "fob": true,
+            "cif": false,
+            "paymentTerms": "String",
+            "image": "/users/1/a.jpg",
+            "postedBy": "59788eb449bfa74fc0db5160",
+            "__v": 0
+        },
+        {
+            "_id": "5979e8664bd22717d0b3eab4",
+            "updatedAt": "2017-07-27T13:19:34.758Z",
+            "createdAt": "2017-07-27T13:19:34.758Z",
+            "origin": "String",
+            "processedAt": "String",
+            "quantity": 1000,
+            "price": 10000,
+            "type": "String",
+            "grade": "String",
+            "defective": 1,
+            "moisture": 2,
+            "quality": "String",
+            "nslg": 3,
+            "packing": "String",
+            "inspection": true,
+            "location": "String",
+            "shipment": "String",
+            "fob": true,
+            "cif": false,
+            "paymentTerms": "String",
+            "image": "/users/1/a.jpg",
+            "postedBy": "59788eb449bfa74fc0db5160",
+            "__v": 0
+        }
+    ]
+}
+------------------------------------------------------------------------------------------------------------------------
+
+
+
